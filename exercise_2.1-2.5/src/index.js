@@ -12,16 +12,24 @@ const Kurssi = () => {
         nimi: 'Half Stack -sovelluskehitys',
         osat: [
             {
+                id: 1,
                 nimi: 'Reactin perusteet',
                 tehtavia: 10
             },
             {
+                id: 2,
                 nimi: 'Tiedonvälitys propseilla',
                 tehtavia: 7
             },
             {
+                id: 3,
                 nimi: 'Komponenttien tila',
                 tehtavia: 14
+            },
+            {
+                id: 4,
+                nimi: 'Redux',
+                tehtavia: 7
             }
         ]
     }
@@ -30,7 +38,7 @@ const Kurssi = () => {
         <div>
             <Otsikko kurssi={kurssi.nimi}/>
             <Sisalto osat={kurssi.osat}/>
-            /*<Yhteensa osat={kurssi.osat}/>*/
+            <Yhteensa osat={kurssi.osat}/>
         </div>
     )
 }
@@ -44,9 +52,7 @@ const Otsikko = (props) => {
 const Sisalto = (props) => {
     return (
         <div>
-            <Osa nimi={props.osat[0].nimi} tehtavia={props.osat[0].tehtavia}/>
-            <Osa nimi={props.osat[1].nimi} tehtavia={props.osat[1].tehtavia}/>
-            <Osa nimi={props.osat[2].nimi} tehtavia={props.osat[2].tehtavia}/>
+            {props.osat.map(osa => <Osa key={osa.id} nimi={osa.nimi} tehtavia={osa.tehtavia}/>)}
         </div>
     )
 }
@@ -57,13 +63,17 @@ const Osa = (props) => {
     )
 }
 
-/*
 const Yhteensa = (props) => {
+    console.log(typeof props.osat[0].tehtavia);
+    const reducer = (prev, cur) => ({tehtavalkm: prev.tehtavalkm + cur.tehtavalkm});
+    const yhteensaTehtavia = props.osat.reduce(reducer).tehtavalkm;
+    console.log(yhteensaTehtavia);
+
     return (
-        <p>yhteensä {props.osat[0].tehtavia + props.osat[1].tehtavia + props.osat[2].tehtavia} tehtävää</p>
+        /*<p>yhteensä x tehtävää</p>*/
+        <p>yhteensä {yhteensaTehtavia} tehtävää</p>
     )
 }
-*/
 
 ReactDOM.render(
     <App />,
