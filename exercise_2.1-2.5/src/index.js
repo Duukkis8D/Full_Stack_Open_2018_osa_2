@@ -64,10 +64,9 @@ const Osa = (props) => {
 }
 
 const Yhteensa = (props) => {
-    console.log(typeof props.osat[0].tehtavia);
-    const reducer = (prev, cur) => ({tehtavalkm: prev.tehtavalkm + cur.tehtavalkm});
-    const yhteensaTehtavia = props.osat.reduce(reducer).tehtavalkm;
-    console.log(yhteensaTehtavia);
+    const yhteensaTehtavia = props.osat
+                                    .map(obj => obj.tehtavia)
+                                    .reduce( (a, b) => (a + b) );
 
     return (
         <p>yhteensä {yhteensaTehtavia} tehtävää</p>
