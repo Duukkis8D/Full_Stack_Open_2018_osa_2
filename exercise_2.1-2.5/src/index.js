@@ -70,7 +70,6 @@ const Yhteensa = (props) => {
     console.log(yhteensaTehtavia);
 
     return (
-        /*<p>yhteensä x tehtävää</p>*/
         <p>yhteensä {yhteensaTehtavia} tehtävää</p>
     )
 }
