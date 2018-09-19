@@ -1,8 +1,10 @@
 import React from 'react';
+import Numbers from './components/Numbers';
+import './components/Numbers.css';
 
 class App extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             persons: [
                 { name: 'Arto Hellas' }
@@ -14,8 +16,11 @@ class App extends React.Component {
     addName = (event) => {
         event.preventDefault();
         console.log(event.target);
+        /* [0] vaaditaan:
+        https://forum.freecodecamp.org/t/getting-an-input-value-when-form-is-submitted-react/161870 */
+        const persons = this.state.persons.concat({ name: event.target[0].value });
         this.setState({
-            persons: this.state.persons.concat({ name: event.target.value }),
+            persons: persons,
             newName: ''
         });
     };
@@ -38,7 +43,7 @@ class App extends React.Component {
                     </div>
                 </form>
                 <h2>Numerot</h2>
-                ...
+                <Numbers persons={this.state.persons}/>
             </div>
         )
     }
