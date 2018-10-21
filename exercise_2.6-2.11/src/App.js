@@ -10,7 +10,10 @@ class App extends React.Component {
             persons: [
                 { name: 'Arto Hellas', phone: '045-627-5288' },
                 { name: 'Matti Meikäläinen', phone: '044-462-9876'},
-                { name: 'Kikka Kakkonen', phone: '050-630-7300'}
+                { name: 'Kikka Kakkonen', phone: '050-630-7300'},
+                { name: 'Martti Tienari', phone: '040-123456' },
+                { name: 'Arto Järvinen', phone: '040-123456' },
+                { name: 'Lea Kutvonen', phone: '040-123456' }
             ],
             newName: '',
             newPhoneNumber: ''
