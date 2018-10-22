@@ -16,7 +16,9 @@ class App extends React.Component {
                 { name: 'Lea Kutvonen', phone: '040-123456' }
             ],
             newName: '',
-            newPhoneNumber: ''
+            newPhoneNumber: '',
+            search: '',
+            showAll: true
         }
     }
 
@@ -51,12 +53,21 @@ class App extends React.Component {
 
     handlePhoneNumberChange = (event) => {
         this.setState({ newPhoneNumber: event.target.value });
-    }
+    };
+
+    handleSearch = (event) => {
+        this.setState({
+            search: event.target.value,
+            showAll: false
+        });
+        if (event.target.value === '') this.setState({ showAll: true })
+    };
 
     render() {
         return (
             <div>
                 <h2>Puhelinluettelo</h2>
+                rajaa näytettäviä: <input value={this.state.search} onChange={this.handleSearch}/>
                 <form onSubmit={this.addPerson}>
                     <div>
                         nimi: <input value={this.state.newName} onChange={this.handleNameChange}/>
@@ -67,7 +78,7 @@ class App extends React.Component {
                     </div>
                 </form>
                 <h2>Numerot</h2>
-                <Numbers persons={this.state.persons}/>
+                <Numbers persons={this.state.persons} showAll={this.state.showAll} search={this.state.search}/>
             </div>
         )
     }
