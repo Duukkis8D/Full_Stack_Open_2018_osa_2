@@ -10,10 +10,10 @@ const Numbers = (props) => {
         <table>
             <thead><tr><th></th></tr></thead>
             <tbody>
-            {persons.map(person => <tr key={person.name}>
+                {persons.map(person => <tr key={person.name}>
                                                 <td key={person.name}>{person.name}</td>
                                                 <td key={person.phone}>{person.phone}</td>
-                                    </tr>)}
+                                       </tr>)}
             </tbody>
         </table>
     )
