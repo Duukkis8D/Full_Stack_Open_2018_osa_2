@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Numbers = (props) => {
+const PersonsList = (props) => {
     const persons =
         props.showAll ?
             props.persons :
@@ -19,4 +19,4 @@ const Numbers = (props) => {
     )
 };
 
-export default Numbers
+export default PersonsList
