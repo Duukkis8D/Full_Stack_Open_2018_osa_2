@@ -1,27 +1,31 @@
 import React from 'react';
+import axios from 'axios';
 import PersonsList from './components/PersonsList';
 import Filter from './components/Filter';
 import AddPerson from './components/AddPerson';
 import './App.css'
-import './components/Numbers.css';
+import './PersonsList.css';
 
 class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            persons: [
-                { name: 'Arto Hellas', phone: '045-627-5288' },
-                { name: 'Matti Meikäläinen', phone: '044-462-9876'},
-                { name: 'Kikka Kakkonen', phone: '050-630-7300'},
-                { name: 'Martti Tienari', phone: '040-123456' },
-                { name: 'Arto Järvinen', phone: '040-123456' },
-                { name: 'Lea Kutvonen', phone: '040-123456' }
-            ],
+            persons: [],
             newName: '',
             newPhoneNumber: '',
             search: '',
             showAll: true
-        }
+        };
+    }
+
+    componentDidMount() {
+        console.log("did mount");
+        axios
+            .get("http://localhost:3001/persons")
+            .then(response => {
+                console.log("promise fullfilled");
+                this.setState({ persons: response.data });
+            });
     }
 
     addPerson = (event) => {
