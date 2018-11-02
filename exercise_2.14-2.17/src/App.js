@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import PersonsList from './components/PersonsList';
 import Filter from './components/Filter';
 import AddPerson from './components/AddPerson';
@@ -20,12 +19,10 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        console.log("did mount");
-        axios
-            .get("http://localhost:3001/persons")
+        personsService
+            .getAll()
             .then(response => {
-                console.log("promise fullfilled");
-                this.setState({ persons: response.data });
+                this.setState({ persons: response });
             });
     }
 
@@ -42,16 +39,24 @@ class App extends React.Component {
         });
 
         if (foundDuplicate === false) {
-            const persons = this.state.persons.concat(
-                { name: event.target[0].value,
-                phone: event.target[1].value }
-            );
-            this.setState({
-                persons: persons,
-                newName: '',
-                newPhoneNumber: ''
-            });
+            this.addPersonToServer(event);
         }
+    };
+
+    addPersonToServer = (event) => {
+        const person = {
+            name: event.target[0].value,
+            phone: event.target[1].value
+        };
+        personsService
+            .create(person)
+            .then(newPerson => {
+                this.setState({
+                    persons: this.state.persons.concat(newPerson),
+                    newName: '',
+                    newPhoneNumber: ''
+                });
+            });
     };
 
     handleNameChange = (event) => {
