@@ -13,6 +13,7 @@ const PersonsList = (props) => {
                 { persons.map(person => <tr key={person.name}>
                                                 <td key={person.name}>{person.name}</td>
                                                 <td key={person.phone}>{person.phone}</td>
+                                                <td><button>poista</button></td>
                                        </tr>) }
             </tbody>
         </table>
