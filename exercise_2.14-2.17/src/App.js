@@ -59,6 +59,17 @@ class App extends React.Component {
             });
     };
 
+    removePerson = (personID, personName) => {
+        return () => {
+            if (window.confirm(`Poistetaanko ${personName} ?`)) {
+                personsService.remove(personID);
+                this.setState({
+                    persons: this.state.persons.filter(person => person.id !== personID)
+                });
+            }
+        }
+    };
+
     handleNameChange = (event) => {
         this.setState({ newName: event.target.value });
     };
@@ -90,7 +101,10 @@ class App extends React.Component {
                     </div>
                 </form>
                 <h2>Numerot</h2>
-                <PersonsList persons={this.state.persons} showAll={this.state.showAll} search={this.state.search}/>
+                <PersonsList persons={this.state.persons}
+                             showAll={this.state.showAll}
+                             search={this.state.search}
+                             removePerson={this.removePerson}/>
             </div>
         )
     }

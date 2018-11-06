@@ -11,10 +11,14 @@ const PersonsList = (props) => {
             <thead><tr><th></th></tr></thead>
             <tbody>
                 { persons.map(person => <tr key={person.name}>
-                                                <td key={person.name}>{person.name}</td>
-                                                <td key={person.phone}>{person.phone}</td>
-                                                <td><button>poista</button></td>
-                                       </tr>) }
+                                            <td key={person.name}>{person.name}</td>
+                                            <td key={person.phone}>{person.phone}</td>
+                                            <td>
+                                                <button onClick={props.removePerson(person.id, person.name)}>
+                                                    poista
+                                                </button>
+                                            </td>
+                                        </tr>) }
             </tbody>
         </table>
     )
