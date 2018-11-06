@@ -2,9 +2,11 @@ import React from 'react';
 import PersonsList from './components/PersonsList';
 import Filter from './components/Filter';
 import AddPerson from './components/AddPerson';
+import Notification from './components/Notification';
 import personsService from './services/persons';
-import './App.css'
-import './PersonsList.css';
+import './css/App.css'
+import './css/PersonsList.css';
+import './css/Notification.css';
 
 class App extends React.Component {
     constructor(props) {
@@ -14,7 +16,8 @@ class App extends React.Component {
             newName: '',
             newPhoneNumber: '',
             search: '',
-            showAll: true
+            showAll: true,
+            message: ''
         };
     }
 
@@ -40,6 +43,10 @@ class App extends React.Component {
 
         if (foundDuplicate === false) {
             this.addPersonToServer(event);
+            this.setState({ message: `Lisättiin ${event.target[0].value}` });
+            setTimeout(() => {
+                this.setState({ message: '' });
+            }, 5000);
         }
     };
 
@@ -64,8 +71,12 @@ class App extends React.Component {
             if (window.confirm(`Poistetaanko ${personName} ?`)) {
                 personsService.remove(personID);
                 this.setState({
-                    persons: this.state.persons.filter(person => person.id !== personID)
+                    persons: this.state.persons.filter(person => person.id !== personID),
+                    message: `Poistettiin ${personName}`
                 });
+                setTimeout(() => {
+                    this.setState({ message: '' });
+                }, 5000);
             }
         }
     };
@@ -90,6 +101,7 @@ class App extends React.Component {
         return (
             <div>
                 <h2>Puhelinluettelo</h2>
+                <Notification message={this.state.message}/>
                 <Filter search={this.state.search} handleSearch={this.handleSearch}/>
                 <form onSubmit={this.addPerson}>
                     <AddPerson newName={this.state.newName}
